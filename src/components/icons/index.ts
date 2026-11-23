@@ -1,0 +1,5 @@
+export { CheckIcon } from './CheckIcon'
+export { ChevronDownIcon } from './ChevronDownIcon'
+export { EmailIcon } from './EmailIcon'
+export { MenuIcon } from './MenuIcon'
+export { PhoneIcon } from './PhoneIcon'
