@@ -14,6 +14,7 @@ type QuoteFormProps = {
 export function QuoteForm({ content }: QuoteFormProps) {
   return (
     <QuoteFormShell
+      id="cotizar"
       label={ui.quoteForm}
       messages={content.submission}
       schemaContent={{

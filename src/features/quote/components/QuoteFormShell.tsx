@@ -31,6 +31,7 @@ import { ConfirmationDialog } from './ConfirmationDialog'
 type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 
 type QuoteFormShellProps = {
+  id: string
   label: string
   messages: SubmissionContent
   schemaContent: QuoteSchemaContent
@@ -62,6 +63,7 @@ function focusFirstError(form: HTMLFormElement, errors: FieldErrors) {
 }
 
 export function QuoteFormShell({
+  id,
   label,
   messages,
   schemaContent,
@@ -159,6 +161,7 @@ export function QuoteFormShell({
         onSubmit={handleSubmit}
         onChange={event => revalidate(event, false)}
         onBlur={event => attempted && revalidate(event, true)}
+        id={id}
         aria-label={label}
         aria-busy={pending}
         className={className}
