@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <>
       <Header content={site} />
-      <main className="relative isolate pb-113 md:pb-107">
+      <main className="relative isolate pb-113 md:pb-107 lg:pb-121">
         <PageBackground />
         <Hero content={content.hero} />
         <QuoteForm content={content} />

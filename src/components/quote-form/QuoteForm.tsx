@@ -14,7 +14,7 @@ export function QuoteForm({ content }: QuoteFormProps) {
   return (
     <form
       aria-label={ui.quoteForm}
-      className="relative mx-auto max-w-994 bg-white px-15 pt-60 pb-50 md:mx-15 md:px-64 md:pt-68 md:pb-100"
+      className="relative mx-auto max-w-994 bg-white px-15 pt-60 pb-50 md:mx-15 md:px-64 md:pt-68 md:pb-100 lg:mx-auto lg:px-85 lg:pt-154 lg:pr-86 lg:pb-93"
     >
       <VehicleFields content={content.vehicle} />
       <PersonalDataSection content={content.personalData} />

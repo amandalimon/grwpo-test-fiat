@@ -14,13 +14,16 @@ export function PersonalDataSection({ content }: PersonalDataSectionProps) {
   const { contactMethod } = content
 
   return (
-    <section aria-labelledby="personal-data-title" className="mt-36 md:mt-66">
+    <section
+      aria-labelledby="personal-data-title"
+      className="mt-36 md:mt-66 lg:mt-71"
+    >
       <SectionTitle
         id="personal-data-title"
         title={content.title}
         subtitle={content.subtitle}
       />
-      <div className="mt-41 grid gap-y-33 md:mt-40 md:grid-cols-3 md:gap-x-62 md:gap-y-49">
+      <div className="mt-41 grid gap-y-33 md:mt-40 md:grid-cols-3 md:gap-x-62 md:gap-y-49 lg:grid-cols-[225fr_226fr_228fr] lg:gap-x-72">
         <TextField
           id="firstName"
           label={content.firstName.label}

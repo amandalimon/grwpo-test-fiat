@@ -17,7 +17,7 @@ export function SectionTitle({
     <header className={cn('text-center', className)}>
       <h2
         id={id}
-        className="flex items-center justify-center gap-20 font-serif text-34 leading-none font-black tracking-title text-red italic md:rules-98 md:rules-y-4 md:text-44 lg:rules-170 lg:text-48"
+        className="flex items-center justify-center gap-20 font-serif text-34 leading-none font-black tracking-title text-red italic md:rules-98 md:rules-y-4 md:text-44 lg:rules-170 lg:rules-y-6 lg:gap-13 lg:text-48"
       >
         {title}
       </h2>

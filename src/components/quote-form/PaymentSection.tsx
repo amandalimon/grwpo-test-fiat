@@ -10,13 +10,16 @@ type PaymentSectionProps = {
 
 export function PaymentSection({ content }: PaymentSectionProps) {
   return (
-    <section aria-labelledby="payment-title" className="mt-47 md:mt-57">
+    <section
+      aria-labelledby="payment-title"
+      className="mt-47 md:mt-57 lg:mt-63"
+    >
       <SectionTitle
         id="payment-title"
         title={content.title}
         subtitle={content.subtitle}
       />
-      <div className="mt-39 grid gap-y-31 md:grid-cols-2 md:gap-x-30 md:gap-y-38">
+      <div className="mt-39 grid gap-y-31 md:grid-cols-2 md:gap-x-30 md:gap-y-38 lg:mr-86 lg:ml-85 lg:grid-cols-[310fr_312fr]">
         <SegmentedControl
           name="paymentMethod"
           className="md:col-span-2"
