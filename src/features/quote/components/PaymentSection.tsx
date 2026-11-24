@@ -2,7 +2,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { SelectField } from '@/components/ui/SelectField'
 import { TextField } from '@/components/ui/TextField'
-import type { PaymentContent } from '@/content/types'
+import type { PaymentContent } from '../types'
 
 type PaymentSectionProps = {
   content: PaymentContent

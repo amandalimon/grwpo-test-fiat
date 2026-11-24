@@ -1,4 +1,5 @@
-import type { Option, QuoteFormContent } from './types'
+import type { Option } from '@/content/types'
+import type { QuoteFormContent } from './types'
 
 const toOptions = (labels: string[]): Option[] =>
   labels.map(label => ({

@@ -2,7 +2,7 @@ import { EmailIcon, PhoneIcon } from '@/components/icons'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { TextField } from '@/components/ui/TextField'
-import type { PersonalDataContent } from '@/content/types'
+import type { PersonalDataContent } from '../types'
 
 const icons = { phone: PhoneIcon, email: EmailIcon }
 

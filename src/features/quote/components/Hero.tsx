@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import car from '@/assets/images/car.png'
-import type { HeroContent } from '@/content/types'
+import type { HeroContent } from '../types'
 import { Eyebrow } from './Eyebrow'
 
 type HeroProps = {

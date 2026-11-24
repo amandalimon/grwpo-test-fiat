@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/Button'
 import { Checkbox } from '@/components/ui/Checkbox'
-import type { ConsentsContent } from '@/content/types'
+import type { ConsentsContent } from '../types'
 
 type FormFooterProps = {
   content: ConsentsContent

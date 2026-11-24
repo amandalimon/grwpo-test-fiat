@@ -1,6 +1,6 @@
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { TextareaField } from '@/components/ui/TextareaField'
-import type { CommentsContent } from '@/content/types'
+import type { CommentsContent } from '../types'
 
 type CommentsSectionProps = {
   content: CommentsContent

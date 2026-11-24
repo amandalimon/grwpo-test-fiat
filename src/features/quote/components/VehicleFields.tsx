@@ -1,5 +1,5 @@
 import { SelectField } from '@/components/ui/SelectField'
-import type { VehicleContent } from '@/content/types'
+import type { VehicleContent } from '../types'
 
 type VehicleFieldsProps = {
   content: VehicleContent

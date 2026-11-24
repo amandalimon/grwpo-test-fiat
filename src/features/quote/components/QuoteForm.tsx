@@ -1,4 +1,4 @@
-import type { QuoteFormContent } from '@/content/types'
+import type { QuoteFormContent } from '../types'
 import { ui } from '@/content/ui'
 import { CommentsSection } from './CommentsSection'
 import { FormFooter } from './FormFooter'

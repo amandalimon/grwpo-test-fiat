@@ -1,9 +1,9 @@
-import { Hero } from '@/components/hero/Hero'
 import { Header } from '@/components/layout/Header'
 import { PageBackground } from '@/components/layout/PageBackground'
-import { QuoteForm } from '@/components/quote-form/QuoteForm'
-import { getQuoteFormContent } from '@/content/quote-form'
 import { getSiteContent } from '@/content/site'
+import { Hero } from '@/features/quote/components/Hero'
+import { QuoteForm } from '@/features/quote/components/QuoteForm'
+import { getQuoteFormContent } from '@/features/quote/content'
 
 export default async function Home() {
   const [site, content] = await Promise.all([
