@@ -15,24 +15,28 @@ export function VehicleFields({ content }: VehicleFieldsProps) {
           label={content.model.label}
           options={content.model.options}
           placeholder={content.placeholder}
+          required
         />
         <SelectField
           id="version"
           label={content.version.label}
           options={content.version.options}
           placeholder={content.placeholder}
+          required
         />
         <SelectField
           id="state"
           label={content.state.label}
           options={content.state.options}
           placeholder={content.placeholder}
+          required
         />
         <SelectField
           id="dealer"
           label={content.dealer.label}
           options={content.dealer.options}
           placeholder={content.placeholder}
+          required
         />
       </div>
     </fieldset>

@@ -1,5 +1,6 @@
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { TextareaField } from '@/components/ui/TextareaField'
+import { fieldLimits } from '../schema'
 import type { CommentsContent } from '../types'
 
 type CommentsSectionProps = {
@@ -23,6 +24,7 @@ export function CommentsSection({ content }: CommentsSectionProps) {
         className="mt-39"
         label={content.message.label}
         placeholder={content.message.placeholder}
+        maxLength={fieldLimits.comments}
       />
     </section>
   )

@@ -1,0 +1,159 @@
+'use client'
+
+import {
+  startTransition,
+  useActionState,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactNode,
+} from 'react'
+import {
+  FieldErrorsContext,
+  type FieldErrors,
+} from '@/components/ui/FieldError'
+import { cn } from '@/lib/cn'
+import { submitQuote, type QuoteFormState } from '../actions'
+import {
+  createQuoteSchema,
+  parseQuote,
+  toQuoteErrors,
+  type QuoteErrors,
+  type QuoteSchemaContent,
+} from '../schema'
+import type { SubmissionContent } from '../types'
+
+type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+
+type QuoteFormShellProps = {
+  label: string
+  messages: SubmissionContent
+  schemaContent: QuoteSchemaContent
+  className?: string
+  children: ReactNode
+}
+
+const initialState: QuoteFormState = { status: 'idle' }
+
+const noErrors: QuoteErrors = { fields: {} }
+
+function isField(element: unknown): element is Field {
+  return (
+    element instanceof HTMLInputElement ||
+    element instanceof HTMLSelectElement ||
+    element instanceof HTMLTextAreaElement
+  )
+}
+
+function focusFirstError(form: HTMLFormElement, errors: FieldErrors) {
+  Array.from(form.elements)
+    .filter(isField)
+    .find(field => errors[field.name])
+    ?.focus()
+}
+
+export function QuoteFormShell({
+  label,
+  messages,
+  schemaContent,
+  className,
+  children,
+}: QuoteFormShellProps) {
+  const formRef = useRef<HTMLFormElement>(null)
+  const schema = useMemo(
+    () => createQuoteSchema(schemaContent),
+    [schemaContent],
+  )
+  const [state, formAction, pending] = useActionState(submitQuote, initialState)
+  const [errors, setErrors] = useState<QuoteErrors>(noErrors)
+  const [attempted, setAttempted] = useState(false)
+  const [handledState, setHandledState] = useState(state)
+
+  if (state !== handledState) {
+    setHandledState(state)
+    setErrors(state.status === 'error' ? state.errors : noErrors)
+    if (state.status === 'success') setAttempted(false)
+  }
+
+  useEffect(() => {
+    const form = formRef.current
+    if (!form) return
+    if (state.status === 'success') form.reset()
+    if (state.status === 'error') focusFirstError(form, state.errors.fields)
+  }, [state])
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (pending) return
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const result = parseQuote(schema, formData)
+
+    setAttempted(true)
+
+    if (!result.success) {
+      const nextErrors = toQuoteErrors(result.error)
+      setErrors(nextErrors)
+      focusFirstError(form, nextErrors.fields)
+      return
+    }
+
+    setErrors(noErrors)
+
+    startTransition(() => formAction(formData))
+  }
+
+  function revalidate(event: FormEvent<HTMLFormElement>, force: boolean) {
+    const { target } = event
+    if (!isField(target) || (!force && !fieldErrors[target.name])) return
+
+    const result = parseQuote(schema, new FormData(event.currentTarget))
+    const next = result.success ? noErrors : toQuoteErrors(result.error)
+    const nextFields: FieldErrors = next.fields
+
+    setErrors(previous => ({
+      form: next.form,
+      fields: { ...previous.fields, [target.name]: nextFields[target.name] },
+    }))
+  }
+
+  const fieldErrors: FieldErrors = errors.fields
+  const hasErrors =
+    Boolean(errors.form) || Object.values(fieldErrors).some(Boolean)
+  const message =
+    errors.form ??
+    (hasErrors
+      ? messages.error
+      : state.status === 'success'
+        ? messages.success
+        : '')
+
+  return (
+    <form
+      ref={formRef}
+      action={formAction}
+      noValidate
+      onSubmit={handleSubmit}
+      onChange={event => revalidate(event, false)}
+      onBlur={event => attempted && revalidate(event, true)}
+      aria-label={label}
+      aria-busy={pending}
+      className={className}
+    >
+      <FieldErrorsContext value={fieldErrors}>{children}</FieldErrorsContext>
+      <p
+        role="status"
+        className={cn(
+          'mt-24 text-center text-13 leading-24 tracking-body md:text-right md:text-14',
+          hasErrors ? 'text-crimson' : 'text-ink',
+          !message && 'sr-only',
+        )}
+      >
+        {message}
+      </p>
+    </form>
+  )
+}

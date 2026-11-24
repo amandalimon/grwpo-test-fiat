@@ -2,6 +2,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { SelectField } from '@/components/ui/SelectField'
 import { TextField } from '@/components/ui/TextField'
+import { fieldLimits } from '../schema'
 import type { PaymentContent } from '../types'
 
 type PaymentSectionProps = {
@@ -30,6 +31,8 @@ export function PaymentSection({ content }: PaymentSectionProps) {
         <TextField
           id="downPayment"
           inputMode="decimal"
+          required
+          maxLength={fieldLimits.downPayment}
           label={content.downPayment.label}
           placeholder={content.downPayment.placeholder}
         />
@@ -38,6 +41,7 @@ export function PaymentSection({ content }: PaymentSectionProps) {
           label={content.term.label}
           options={content.term.options}
           defaultValue={content.term.defaultValue}
+          required
         />
       </div>
     </section>

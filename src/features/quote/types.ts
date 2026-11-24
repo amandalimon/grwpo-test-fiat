@@ -68,6 +68,11 @@ export type ConsentsContent = {
   submit: string
 }
 
+export type SubmissionContent = {
+  success: string
+  error: string
+}
+
 export type QuoteFormContent = {
   hero: HeroContent
   vehicle: VehicleContent
@@ -75,4 +80,5 @@ export type QuoteFormContent = {
   payment: PaymentContent
   comments: CommentsContent
   consents: ConsentsContent
+  submission: SubmissionContent
 }

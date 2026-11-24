@@ -2,6 +2,7 @@ import { EmailIcon, PhoneIcon } from '@/components/icons'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { TextField } from '@/components/ui/TextField'
+import { fieldLimits } from '../schema'
 import type { PersonalDataContent } from '../types'
 
 const icons = { phone: <PhoneIcon />, email: <EmailIcon /> }
@@ -29,18 +30,23 @@ export function PersonalDataSection({ content }: PersonalDataSectionProps) {
           label={content.firstName.label}
           placeholder={content.firstName.placeholder}
           autoComplete="given-name"
+          required
+          maxLength={fieldLimits.name}
         />
         <TextField
           id="lastName"
           label={content.lastName.label}
           placeholder={content.lastName.placeholder}
           autoComplete="family-name"
+          required
+          maxLength={fieldLimits.name}
         />
         <TextField
           id="secondLastName"
           label={content.secondLastName.label}
           placeholder={content.secondLastName.placeholder}
           autoComplete="additional-name"
+          maxLength={fieldLimits.name}
         />
         <TextField
           id="email"
@@ -48,6 +54,8 @@ export function PersonalDataSection({ content }: PersonalDataSectionProps) {
           label={content.email.label}
           placeholder={content.email.placeholder}
           autoComplete="email"
+          required
+          maxLength={fieldLimits.email}
         />
         <TextField
           id="phone"
@@ -55,6 +63,8 @@ export function PersonalDataSection({ content }: PersonalDataSectionProps) {
           label={content.phone.label}
           placeholder={content.phone.placeholder}
           autoComplete="tel"
+          required
+          maxLength={fieldLimits.phone}
         />
         <SegmentedControl
           name="contactMethod"
