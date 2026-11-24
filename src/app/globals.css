@@ -34,6 +34,7 @@
   --tracking-caps: 0.5em;
   --tracking-field: 0.27em;
   --tracking-button: 0.62em;
+  --tracking-nav: -0.02em;
 }
 
 @theme inline {
