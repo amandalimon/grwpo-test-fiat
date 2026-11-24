@@ -7,8 +7,9 @@ import {
   useMemo,
   useRef,
   useState,
-  type FormEvent,
   type ReactNode,
+  type SubmitEvent,
+  type SyntheticEvent,
 } from 'react'
 import {
   FieldErrorsContext,
@@ -84,7 +85,7 @@ export function QuoteFormShell({
     if (state.status === 'error') focusFirstError(form, state.errors.fields)
   }, [state])
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
     if (pending) return
 
@@ -106,7 +107,7 @@ export function QuoteFormShell({
     startTransition(() => formAction(formData))
   }
 
-  function revalidate(event: FormEvent<HTMLFormElement>, force: boolean) {
+  function revalidate(event: SyntheticEvent<HTMLFormElement>, force: boolean) {
     const { target } = event
     if (!isField(target) || (!force && !fieldErrors[target.name])) return
 
