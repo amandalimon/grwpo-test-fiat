@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  createContext,
   startTransition,
   useActionState,
   useEffect,
@@ -39,6 +40,8 @@ type QuoteFormShellProps = {
 const initialState: QuoteFormState = { status: 'idle' }
 
 const noErrors: QuoteErrors = { fields: {} }
+
+export const QuoteFormPendingContext = createContext(false)
 
 function isField(element: unknown): element is Field {
   return (
@@ -144,7 +147,9 @@ export function QuoteFormShell({
       aria-busy={pending}
       className={className}
     >
-      <FieldErrorsContext value={fieldErrors}>{children}</FieldErrorsContext>
+      <QuoteFormPendingContext value={pending}>
+        <FieldErrorsContext value={fieldErrors}>{children}</FieldErrorsContext>
+      </QuoteFormPendingContext>
       <p
         role="status"
         className={cn(

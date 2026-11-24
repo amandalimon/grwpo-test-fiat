@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/Button'
 import { Checkbox } from '@/components/ui/Checkbox'
 import type { ConsentsContent } from '../types'
+import { SubmitButton } from './SubmitButton'
 
 type FormFooterProps = {
   content: ConsentsContent
@@ -18,12 +18,11 @@ export function FormFooter({ content }: FormFooterProps) {
         </Checkbox>
         <Checkbox name="optOutOfPromotions">{content.promotions}</Checkbox>
       </div>
-      <Button
-        type="submit"
+      <SubmitButton
+        label={content.submit}
+        pendingLabel={content.submitting}
         className="mt-33 w-135 max-md:mr-1 md:mt-0 md:w-142"
-      >
-        {content.submit}
-      </Button>
+      />
     </div>
   )
 }

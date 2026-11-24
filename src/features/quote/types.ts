@@ -66,6 +66,7 @@ export type ConsentsContent = {
   }
   promotions: string
   submit: string
+  submitting: string
 }
 
 export type SubmissionContent = {

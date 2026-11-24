@@ -136,6 +136,7 @@ const quoteFormContent: QuoteFormContent = {
     },
     promotions: 'No deseo recibir promociones',
     submit: 'Enviar',
+    submitting: 'Enviando…',
   },
   submission: {
     success: 'Gracias. Un distribuidor se pondrá en contacto contigo.',
