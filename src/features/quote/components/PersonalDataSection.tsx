@@ -4,7 +4,7 @@ import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { TextField } from '@/components/ui/TextField'
 import type { PersonalDataContent } from '../types'
 
-const icons = { phone: PhoneIcon, email: EmailIcon }
+const icons = { phone: <PhoneIcon />, email: <EmailIcon /> }
 
 type PersonalDataSectionProps = {
   content: PersonalDataContent
@@ -64,7 +64,7 @@ export function PersonalDataSection({ content }: PersonalDataSectionProps) {
           segments={contactMethod.options.map(option => ({
             value: option.value,
             label: option.label,
-            Icon: option.icon && icons[option.icon],
+            icon: option.icon && icons[option.icon],
           }))}
         />
       </div>
