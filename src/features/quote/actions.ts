@@ -1,5 +1,6 @@
 'use server'
 
+import { toConfirmation, type QuoteConfirmation } from './confirmation'
 import { getQuoteFormContent } from './content'
 import {
   createQuoteSchema,
@@ -10,19 +11,22 @@ import {
 
 export type QuoteFormState =
   | { status: 'idle' }
-  | { status: 'success' }
+  | { status: 'success'; confirmation: QuoteConfirmation }
   | { status: 'error'; errors: QuoteErrors }
 
 export async function submitQuote(
   _previousState: QuoteFormState,
   formData: FormData,
 ): Promise<QuoteFormState> {
-  const schema = createQuoteSchema(await getQuoteFormContent())
-  const result = parseQuote(schema, formData)
+  const content = await getQuoteFormContent()
+  const result = parseQuote(createQuoteSchema(content), formData)
 
   if (!result.success) {
     return { status: 'error', errors: toQuoteErrors(result.error) }
   }
 
-  return { status: 'success' }
+  return {
+    status: 'success',
+    confirmation: toConfirmation(result.data, content),
+  }
 }

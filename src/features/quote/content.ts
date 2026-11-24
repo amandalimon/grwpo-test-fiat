@@ -139,8 +139,22 @@ const quoteFormContent: QuoteFormContent = {
     submitting: 'Enviando…',
   },
   submission: {
-    success: 'Gracias. Un distribuidor se pondrá en contacto contigo.',
-    error: 'Revisa los campos marcados e inténtalo de nuevo.',
+    errorSummary: {
+      one: 'Hay 1 campo por corregir.',
+      other: 'Hay {count} campos por corregir.',
+    },
+    confirmation: {
+      title: '¡Gracias, {name}!',
+      subtitle: 'Tu cotización fue enviada',
+      credit: '{method} a {term}',
+      downPayment: 'Enganche de {amount}',
+      contact: {
+        phone: 'Un distribuidor te contactará por teléfono.',
+        email: 'Un distribuidor te contactará por email.',
+        both: 'Un distribuidor te contactará por teléfono o email.',
+      },
+      newQuote: 'Nueva cotización',
+    },
   },
 }
 

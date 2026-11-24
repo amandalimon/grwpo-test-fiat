@@ -73,4 +73,8 @@
   select {
     appearance: none;
   }
+
+  :root:has(dialog:modal) {
+    overflow: hidden;
+  }
 }

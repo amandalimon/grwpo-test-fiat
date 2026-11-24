@@ -16,7 +16,7 @@ import {
   FieldErrorsContext,
   type FieldErrors,
 } from '@/components/ui/FieldError'
-import { cn } from '@/lib/cn'
+import { fillTemplate } from '@/lib/fill-template'
 import { submitQuote, type QuoteFormState } from '../actions'
 import {
   createQuoteSchema,
@@ -26,6 +26,7 @@ import {
   type QuoteSchemaContent,
 } from '../schema'
 import type { SubmissionContent } from '../types'
+import { ConfirmationDialog } from './ConfirmationDialog'
 
 type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 
@@ -41,11 +42,13 @@ const initialState: QuoteFormState = { status: 'idle' }
 
 const noErrors: QuoteErrors = { fields: {} }
 
+const pluralRules = new Intl.PluralRules('es-MX')
+
 export const QuoteFormPendingContext = createContext(false)
 
 function isField(element: unknown): element is Field {
   return (
-    element instanceof HTMLInputElement ||
+    (element instanceof HTMLInputElement && element.type !== 'hidden') ||
     element instanceof HTMLSelectElement ||
     element instanceof HTMLTextAreaElement
   )
@@ -66,6 +69,7 @@ export function QuoteFormShell({
   children,
 }: QuoteFormShellProps) {
   const formRef = useRef<HTMLFormElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
   const schema = useMemo(
     () => createQuoteSchema(schemaContent),
     [schemaContent],
@@ -84,7 +88,13 @@ export function QuoteFormShell({
   useEffect(() => {
     const form = formRef.current
     if (!form) return
-    if (state.status === 'success') form.reset()
+    if (state.status === 'success') {
+      form.reset()
+      if (dialogRef.current) {
+        dialogRef.current.returnValue = ''
+        dialogRef.current.showModal()
+      }
+    }
     if (state.status === 'error') focusFirstError(form, state.errors.fields)
   }, [state])
 
@@ -124,42 +134,60 @@ export function QuoteFormShell({
     }))
   }
 
+  function startNewQuote() {
+    const firstField = Array.from(formRef.current?.elements ?? []).find(isField)
+    firstField?.focus()
+  }
+
   const fieldErrors: FieldErrors = errors.fields
-  const hasErrors =
-    Boolean(errors.form) || Object.values(fieldErrors).some(Boolean)
-  const message =
-    errors.form ??
-    (hasErrors
-      ? messages.error
-      : state.status === 'success'
-        ? messages.success
-        : '')
+  const errorCount = Object.values(fieldErrors).filter(Boolean).length
+  const errorSummary = errorCount
+    ? fillTemplate(
+        messages.errorSummary[
+          pluralRules.select(errorCount) === 'one' ? 'one' : 'other'
+        ],
+        { count: errorCount },
+      )
+    : ''
 
   return (
-    <form
-      ref={formRef}
-      action={formAction}
-      noValidate
-      onSubmit={handleSubmit}
-      onChange={event => revalidate(event, false)}
-      onBlur={event => attempted && revalidate(event, true)}
-      aria-label={label}
-      aria-busy={pending}
-      className={className}
-    >
-      <QuoteFormPendingContext value={pending}>
-        <FieldErrorsContext value={fieldErrors}>{children}</FieldErrorsContext>
-      </QuoteFormPendingContext>
-      <p
-        role="status"
-        className={cn(
-          'mt-24 text-center text-13 leading-24 tracking-body md:text-right md:text-14',
-          hasErrors ? 'text-crimson' : 'text-ink',
-          !message && 'sr-only',
-        )}
+    <>
+      <form
+        ref={formRef}
+        action={formAction}
+        noValidate
+        onSubmit={handleSubmit}
+        onChange={event => revalidate(event, false)}
+        onBlur={event => attempted && revalidate(event, true)}
+        aria-label={label}
+        aria-busy={pending}
+        className={className}
       >
-        {message}
-      </p>
-    </form>
+        <QuoteFormPendingContext value={pending}>
+          <FieldErrorsContext value={fieldErrors}>
+            {children}
+          </FieldErrorsContext>
+        </QuoteFormPendingContext>
+        {errors.form ? (
+          <p
+            role="alert"
+            className="mt-24 text-center text-13 leading-24 tracking-body text-crimson md:text-right md:text-14"
+          >
+            {errors.form}
+          </p>
+        ) : (
+          <p role="status" className="sr-only">
+            {errorSummary}
+          </p>
+        )}
+      </form>
+      <ConfirmationDialog
+        ref={dialogRef}
+        confirmation={state.status === 'success' ? state.confirmation : null}
+        subtitle={messages.confirmation.subtitle}
+        action={messages.confirmation.newQuote}
+        onAction={startNewQuote}
+      />
+    </>
   )
 }

@@ -70,8 +70,18 @@ export type ConsentsContent = {
 }
 
 export type SubmissionContent = {
-  success: string
-  error: string
+  errorSummary: {
+    one: string
+    other: string
+  }
+  confirmation: {
+    title: string
+    subtitle: string
+    credit: string
+    downPayment: string
+    contact: Record<string, string>
+    newQuote: string
+  }
 }
 
 export type QuoteFormContent = {
