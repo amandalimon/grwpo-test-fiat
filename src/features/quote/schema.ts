@@ -133,6 +133,10 @@ export type QuoteSchema = ReturnType<typeof createQuoteSchema>
 
 export type QuoteFormValues = z.output<QuoteSchema>
 
+export type QuoteFieldName = keyof QuoteFormValues
+
+export const field = <Name extends QuoteFieldName>(name: Name) => name
+
 export type QuoteFieldErrors = Partial<Record<keyof QuoteFormValues, string>>
 
 export type QuoteErrors = {

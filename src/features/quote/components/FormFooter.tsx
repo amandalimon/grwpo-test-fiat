@@ -1,5 +1,6 @@
 import { Checkbox } from '@/components/ui/Checkbox'
 import { ui } from '@/content/ui'
+import { field } from '../schema'
 import type { ConsentsContent } from '../types'
 import { SubmitButton } from './SubmitButton'
 
@@ -11,7 +12,7 @@ export function FormFooter({ content }: FormFooterProps) {
   return (
     <div className="mt-50 flex flex-col items-center md:mt-73 md:flex-row md:items-end md:justify-between">
       <div className="flex flex-col gap-19 self-stretch md:self-auto">
-        <Checkbox name="acceptPrivacyNotice" defaultChecked required>
+        <Checkbox name={field('acceptPrivacyNotice')} defaultChecked required>
           {content.privacy.before}
           <a
             href={content.privacy.href}
@@ -23,7 +24,9 @@ export function FormFooter({ content }: FormFooterProps) {
             <span className="sr-only"> {ui.newTab}</span>
           </a>
         </Checkbox>
-        <Checkbox name="optOutOfPromotions">{content.promotions}</Checkbox>
+        <Checkbox name={field('optOutOfPromotions')}>
+          {content.promotions}
+        </Checkbox>
       </div>
       <SubmitButton
         label={content.submit}
