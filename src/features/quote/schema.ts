@@ -19,8 +19,24 @@ export const fieldLimits = {
   comments: 500,
 }
 
+const lowercaseParticles = new Set(['de', 'del', 'la', 'las', 'los', 'y'])
+
 const normalizeName = (value: string) =>
-  value.normalize('NFC').replace(/\s+/g, ' ')
+  value
+    .normalize('NFC')
+    .replace(/\s+/g, ' ')
+    .toLocaleLowerCase('es-MX')
+    .split(' ')
+    .map((word, index) =>
+      index > 0 && lowercaseParticles.has(word)
+        ? word
+        : word.replace(
+            /(^|[-'’])(\p{L})/gu,
+            (_, separator: string, letter: string) =>
+              separator + letter.toLocaleUpperCase('es-MX'),
+          ),
+    )
+    .join(' ')
 
 const toCents = (value: string) => {
   const [whole, fraction = ''] = value.replace(/[$,]/g, '').split('.')
