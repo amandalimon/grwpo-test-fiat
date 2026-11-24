@@ -132,7 +132,7 @@ const quoteFormContent: QuoteFormContent = {
     privacy: {
       before: 'He leído y acepto el ',
       link: 'aviso de privacidad',
-      href: '#aviso-de-privacidad',
+      href: 'https://avisodeprivacidad.stellantis.com.mx/',
     },
     promotions: 'No deseo recibir promociones',
     submit: 'Enviar',

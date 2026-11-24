@@ -1,4 +1,5 @@
 import { Checkbox } from '@/components/ui/Checkbox'
+import { ui } from '@/content/ui'
 import type { ConsentsContent } from '../types'
 import { SubmitButton } from './SubmitButton'
 
@@ -12,8 +13,14 @@ export function FormFooter({ content }: FormFooterProps) {
       <div className="flex flex-col gap-19 self-stretch md:self-auto">
         <Checkbox name="acceptPrivacyNotice" defaultChecked required>
           {content.privacy.before}
-          <a href={content.privacy.href} className="font-bold underline">
+          <a
+            href={content.privacy.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold underline"
+          >
             {content.privacy.link}
+            <span className="sr-only"> {ui.newTab}</span>
           </a>
         </Checkbox>
         <Checkbox name="optOutOfPromotions">{content.promotions}</Checkbox>
