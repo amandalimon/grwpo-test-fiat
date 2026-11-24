@@ -6,6 +6,7 @@ import { focusRing } from '@/components/ui/styles'
 import type { SiteContent } from '@/content/types'
 import { ui } from '@/content/ui'
 import { cn } from '@/lib/cn'
+import { SiteMenu } from './SiteMenu'
 
 type HeaderProps = {
   content: SiteContent
@@ -48,6 +49,7 @@ export function Header({ content }: HeaderProps) {
         </nav>
         <button
           type="button"
+          popoverTarget="site-menu"
           aria-label={ui.openMenu}
           className={cn(
             'mt-18 mr-30 flex cursor-pointer self-start text-crimson md:mr-23 lg:mr-8',
@@ -56,6 +58,7 @@ export function Header({ content }: HeaderProps) {
         >
           <MenuIcon />
         </button>
+        <SiteMenu id="site-menu" label={ui.menu} links={content.navigation} />
       </div>
     </header>
   )

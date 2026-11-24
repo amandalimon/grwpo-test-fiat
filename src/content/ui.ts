@@ -1,6 +1,7 @@
 export const ui = {
   mainNavigation: 'Principal',
   openMenu: 'Abrir menú',
+  menu: 'Menú',
   quoteForm: 'Cotizador',
   validation: {
     required: 'Este campo es obligatorio.',
