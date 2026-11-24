@@ -1,0 +1,45 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@theme",
+      "description": "Defines Tailwind CSS theme tokens such as colors, fonts, spacing, and type scale."
+    },
+    {
+      "name": "@utility",
+      "description": "Defines a custom Tailwind CSS utility."
+    },
+    {
+      "name": "@variant",
+      "description": "Defines a custom Tailwind CSS variant."
+    },
+    {
+      "name": "@custom-variant",
+      "description": "Defines a custom Tailwind CSS variant."
+    },
+    {
+      "name": "@source",
+      "description": "Tells Tailwind CSS which files to scan for class names."
+    },
+    {
+      "name": "@plugin",
+      "description": "Loads a Tailwind CSS plugin."
+    },
+    {
+      "name": "@config",
+      "description": "Points Tailwind CSS at a JavaScript config file."
+    },
+    {
+      "name": "@reference",
+      "description": "Imports a Tailwind CSS stylesheet as a reference without emitting its CSS."
+    },
+    {
+      "name": "@apply",
+      "description": "Inlines Tailwind CSS utility classes into a rule."
+    },
+    {
+      "name": "@tailwind",
+      "description": "Includes Tailwind CSS layers."
+    }
+  ]
+}

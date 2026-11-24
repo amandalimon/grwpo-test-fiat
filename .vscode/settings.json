@@ -1,0 +1,7 @@
+{
+  "css.customData": [".vscode/tailwind.css-data.json"],
+  "scss.customData": [".vscode/tailwind.css-data.json"],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}
