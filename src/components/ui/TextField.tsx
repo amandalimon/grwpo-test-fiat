@@ -15,7 +15,7 @@ export function TextField({ id, label, className, ...props }: TextFieldProps) {
       <input
         id={id}
         name={id}
-        className={cn(control, 'mt-6 h-40')}
+        className={cn(control, 'mt-7 h-40')}
         {...props}
       />
     </div>

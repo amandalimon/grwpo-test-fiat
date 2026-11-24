@@ -11,7 +11,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        'h-45 cursor-pointer border border-red bg-white pl-6 text-12 font-black tracking-caps text-ink uppercase transition-colors hover:bg-red hover:text-white',
+        'h-45 cursor-pointer border border-red bg-white pb-2 pl-4 text-11 font-black tracking-button text-ink uppercase transition-colors hover:bg-red hover:text-white',
         focusRing,
         className,
       )}

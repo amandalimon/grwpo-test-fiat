@@ -31,7 +31,7 @@ export function SegmentedControl({
   return (
     <fieldset className={className}>
       <legend className={cn(fieldLabel, 'float-left w-full')}>{legend}</legend>
-      <div className="clear-both grid auto-cols-fr grid-flow-col pt-6">
+      <div className="clear-both grid auto-cols-fr grid-flow-col pt-7">
         {segments.map(({ value, label, Icon }) => (
           <label
             key={value}

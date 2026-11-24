@@ -32,6 +32,8 @@
   --tracking-body: 0.05em;
   --tracking-label: 0.2em;
   --tracking-caps: 0.5em;
+  --tracking-field: 0.27em;
+  --tracking-button: 0.62em;
 }
 
 @theme inline {

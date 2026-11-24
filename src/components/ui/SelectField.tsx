@@ -28,7 +28,7 @@ export function SelectField({
   return (
     <div className={className}>
       <FieldLabel htmlFor={id}>{label}</FieldLabel>
-      <div className="relative mt-6">
+      <div className="relative mt-7">
         <select
           id={id}
           name={id}

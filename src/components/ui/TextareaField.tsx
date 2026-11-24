@@ -22,7 +22,7 @@ export function TextareaField({
         name={id}
         className={cn(
           control,
-          'mt-6 h-75 resize-none py-5 pl-8 placeholder:font-normal md:h-170',
+          'mt-7 h-75 resize-none py-5 pl-8 placeholder:font-normal md:h-170',
         )}
         {...props}
       />
