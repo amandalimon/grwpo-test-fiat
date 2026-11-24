@@ -8,7 +8,7 @@ type CommentsSectionProps = {
 
 export function CommentsSection({ content }: CommentsSectionProps) {
   return (
-    <section aria-labelledby="comments-title" className="mt-51">
+    <section aria-labelledby="comments-title" className="mt-51 md:mt-57.5">
       <SectionTitle
         id="comments-title"
         title={content.title}

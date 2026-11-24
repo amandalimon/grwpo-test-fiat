@@ -52,6 +52,13 @@
   }
 }
 
+@utility rules-y-* {
+  &::before,
+  &::after {
+    translate: 0 calc(var(--spacing) * --value(number));
+  }
+}
+
 @layer base {
   body {
     background-color: var(--color-white);

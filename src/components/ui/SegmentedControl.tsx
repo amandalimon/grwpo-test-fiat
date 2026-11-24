@@ -25,7 +25,7 @@ export function SegmentedControl({
 }: SegmentedControlProps) {
   const hasIcons = segments.some(segment => segment.Icon)
   const layout = hasIcons
-    ? 'h-50 flex-col gap-4 md:h-40 md:flex-row md:gap-10'
+    ? 'h-50 flex-col gap-3 md:h-40 md:flex-row md:gap-29 lg:gap-31'
     : 'h-40'
 
   return (
@@ -39,6 +39,8 @@ export function SegmentedControl({
               'relative -ml-1 flex cursor-pointer items-center justify-center border border-red bg-white first:ml-0 has-checked:z-10 has-checked:bg-red has-checked:text-white has-focus-visible:z-20 has-focus-visible:outline-2',
               focusRing,
               layout,
+              Icon ? 'pb-1' : 'pt-0.5',
+              'md:pt-0 md:pb-1.5',
               controlText,
             )}
           >
@@ -49,7 +51,11 @@ export function SegmentedControl({
               defaultChecked={value === defaultValue}
               className="sr-only"
             />
-            {Icon && <Icon />}
+            {Icon && (
+              <span className="flex h-11 items-center">
+                <Icon />
+              </span>
+            )}
             {label}
           </label>
         ))}

@@ -8,8 +8,8 @@ type FormFooterProps = {
 
 export function FormFooter({ content }: FormFooterProps) {
   return (
-    <div className="mt-50 flex flex-col items-center">
-      <div className="flex flex-col gap-19 self-stretch">
+    <div className="mt-50 flex flex-col items-center md:mt-73 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col gap-19 self-stretch md:self-auto">
         <Checkbox name="acceptPrivacyNotice" defaultChecked required>
           {content.privacy.before}
           <a href={content.privacy.href} className="font-bold underline">
@@ -18,7 +18,10 @@ export function FormFooter({ content }: FormFooterProps) {
         </Checkbox>
         <Checkbox name="optOutOfPromotions">{content.promotions}</Checkbox>
       </div>
-      <Button type="submit" className="mt-33 w-135 max-md:mr-1">
+      <Button
+        type="submit"
+        className="mt-33 w-135 max-md:mr-1 md:mt-0 md:w-142"
+      >
         {content.submit}
       </Button>
     </div>

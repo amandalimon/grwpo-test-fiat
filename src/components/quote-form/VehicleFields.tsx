@@ -9,7 +9,7 @@ export function VehicleFields({ content }: VehicleFieldsProps) {
   return (
     <fieldset>
       <legend className="sr-only">{content.legend}</legend>
-      <div className="grid gap-y-27">
+      <div className="grid gap-y-27 md:grid-cols-2 md:gap-x-30 md:gap-y-43">
         <SelectField
           id="model"
           label={content.model.label}

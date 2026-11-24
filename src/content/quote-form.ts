@@ -90,7 +90,7 @@ const quoteFormContent: QuoteFormContent = {
     lastName: { label: 'Apellido paterno', placeholder: 'Ej. López' },
     secondLastName: { label: 'Apellido materno', placeholder: 'Ej. Tovar' },
     email: { label: 'Email', placeholder: 'tu@email.com' },
-    phone: { label: 'Teléfono', placeholder: '01 . 844 . 439 . 0654' },
+    phone: { label: 'Teléfono', placeholder: '01 . 844 . 439 . 06' },
     contactMethod: {
       legend: 'Deseo ser contactado por',
       defaultValue: 'phone',

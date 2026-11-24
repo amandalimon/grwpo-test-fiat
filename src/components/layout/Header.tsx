@@ -26,8 +26,11 @@ export function Header({ content }: HeaderProps) {
             unoptimized
           />
         </Link>
-        <nav aria-label={ui.mainNavigation} className="hidden md:block">
-          <ul className="flex font-nav text-11 font-bold tracking-body text-text uppercase">
+        <nav
+          aria-label={ui.mainNavigation}
+          className="hidden md:mt-3 md:mr-75 md:ml-99 md:block md:flex-1"
+        >
+          <ul className="flex justify-between font-nav text-11 font-bold tracking-body text-text uppercase">
             {content.navigation.map(link => (
               <li
                 key={link.href}
@@ -44,7 +47,7 @@ export function Header({ content }: HeaderProps) {
           type="button"
           aria-label={ui.openMenu}
           className={cn(
-            'mt-18 mr-30 flex cursor-pointer self-start text-crimson',
+            'mt-18 mr-30 flex cursor-pointer self-start text-crimson md:mr-23',
             focusRing,
           )}
         >

@@ -3,7 +3,7 @@ import { cn } from '@/lib/cn'
 export const focusRing = 'outline-offset-2 outline-blue focus-visible:outline-2'
 
 export const fieldLabel =
-  'block pl-10 text-12 leading-none tracking-label text-muted uppercase'
+  'block pl-10 text-12 leading-none tracking-label whitespace-nowrap text-muted uppercase'
 
 export const controlText =
   'text-12 font-black tracking-label text-text uppercase'
