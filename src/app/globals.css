@@ -41,6 +41,17 @@
   --font-nav: 'Gill Sans', 'Gill Sans MT', var(--font-lato), sans-serif;
 }
 
+@utility rules-* {
+  &::before,
+  &::after {
+    content: '';
+    flex: none;
+    width: calc(var(--spacing) * --value(integer));
+    height: 1px;
+    background-color: currentColor;
+  }
+}
+
 @layer base {
   body {
     background-color: var(--color-white);
