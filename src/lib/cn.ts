@@ -4,7 +4,7 @@ import { extendTailwindMerge, validators } from 'tailwind-merge'
 const twMerge = extendTailwindMerge<'rules'>({
   extend: {
     theme: {
-      text: [validators.isNumber],
+      text: [validators.isNumber, 'hero-sm', 'hero-md', 'hero-lg'],
       tracking: [validators.isAny],
     },
     classGroups: {

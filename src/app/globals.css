@@ -23,8 +23,9 @@
   --text-34: 2.125rem;
   --text-44: 2.75rem;
   --text-48: 3rem;
-  --text-81: 5.0625rem;
-  --text-115: 7.1875rem;
+  --text-hero-sm: 2.735rem;
+  --text-hero-md: 5.0795rem;
+  --text-hero-lg: 7.1634rem;
 
   --tracking-*: initial;
   --tracking-hero: -0.025em;

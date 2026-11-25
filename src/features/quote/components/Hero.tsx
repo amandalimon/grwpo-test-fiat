@@ -14,7 +14,7 @@ export function Hero({ content }: HeroProps) {
         {content.overline}
       </p>
       <Eyebrow className="mt-17 md:mt-20">{content.eyebrow}</Eyebrow>
-      <h1 className="mt-11 -translate-x-7 scale-y-96 font-serif text-44 leading-none font-black tracking-hero text-white italic md:-translate-x-15.5 md:text-81 lg:mt-10 lg:-translate-x-17 lg:text-115">
+      <h1 className="mt-13 -translate-x-6.5 scale-y-96 font-serif text-hero-sm leading-none font-black tracking-hero text-white italic md:mt-11 md:-translate-x-14 md:text-hero-md lg:mt-11 lg:-translate-x-14 lg:text-hero-lg">
         {content.title}
       </h1>
       <Image
@@ -24,7 +24,7 @@ export function Hero({ content }: HeroProps) {
         quality={90}
         loading="eager"
         fetchPriority="high"
-        className="mt-4.5 -mb-48 w-249 -translate-x-1 md:-mt-9.5 md:-mb-38.5 md:w-387 md:translate-x-0 lg:-mt-21.5 lg:-mb-121 lg:w-489 lg:-translate-x-16"
+        className="mt-2.5 -mb-48 w-249 -translate-x-1 md:-mt-9.5 md:-mb-38.5 md:w-387 md:translate-x-0 lg:-mt-22.5 lg:-mb-121 lg:w-489 lg:-translate-x-16"
       />
     </div>
   )
