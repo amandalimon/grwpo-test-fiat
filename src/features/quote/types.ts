@@ -74,6 +74,7 @@ export type SubmissionContent = {
     one: string
     other: string
   }
+  failed: string
   confirmation: {
     title: string
     subtitle: string

@@ -45,6 +45,11 @@ const noErrors: QuoteErrors = { fields: {} }
 
 const pluralRules = new Intl.PluralRules('es-MX')
 
+const failed = (message: string): QuoteFormState => ({
+  status: 'error',
+  errors: { form: message, fields: {} },
+})
+
 export const QuoteFormPendingContext = createContext(false)
 
 function isField(element: unknown): element is Field {
@@ -76,7 +81,16 @@ export function QuoteFormShell({
     () => createQuoteSchema(schemaContent),
     [schemaContent],
   )
-  const [state, formAction, pending] = useActionState(submitQuote, initialState)
+  const [state, formAction, pending] = useActionState(
+    async (previous: QuoteFormState, formData: FormData) => {
+      try {
+        return await submitQuote(previous, formData)
+      } catch {
+        return failed(messages.failed)
+      }
+    },
+    initialState,
+  )
   const [errors, setErrors] = useState<QuoteErrors>(noErrors)
   const [attempted, setAttempted] = useState(false)
   const [handledState, setHandledState] = useState(state)

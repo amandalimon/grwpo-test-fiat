@@ -143,6 +143,8 @@ const quoteFormContent: QuoteFormContent = {
       one: 'Hay 1 campo por corregir.',
       other: 'Hay {count} campos por corregir.',
     },
+    failed:
+      'No pudimos enviar tu cotización. Revisa tu conexión e inténtalo de nuevo.',
     confirmation: {
       title: '¡Gracias, {name}!',
       subtitle: 'Tu cotización fue enviada',
