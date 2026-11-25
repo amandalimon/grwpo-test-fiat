@@ -42,7 +42,7 @@ export function ConfirmationDialog({
         <div className="px-15 pt-45 pb-40 md:px-50 md:pt-55 md:pb-50">
           <h2
             id="confirmation-title"
-            className="flex rules-24 items-center justify-center gap-14 font-serif text-34 leading-none font-black tracking-title text-balance text-red italic md:rules-40 md:gap-20 md:text-44"
+            className="flex rules-24 items-center justify-center gap-14 font-serif text-34 leading-none font-black tracking-title text-balance wrap-anywhere text-red italic md:rules-40 md:gap-20 md:text-44"
           >
             {confirmation.title}
           </h2>

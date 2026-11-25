@@ -10,6 +10,7 @@ const mexicanNationalNumber = /^[1-9]\d{9}$/
 const namePattern = /^\p{L}[\p{L}\p{M}' ’.-]*$/u
 const amountPattern = /^\$?(\d{1,3}(,\d{3})+|\d+)(\.\d{1,2})?$/
 const maxDownPaymentCents = 10_000_000 * 100
+const maxNameWordLength = 20
 
 export const fieldLimits = {
   name: 50,
@@ -37,6 +38,9 @@ const normalizeName = (value: string) =>
           ),
     )
     .join(' ')
+
+const hasShortWords = (value: string) =>
+  value.split(/[\s-]/).every(word => word.length <= maxNameWordLength)
 
 const toCents = (value: string) => {
   const [whole, fraction = ''] = value.replace(/[$,]/g, '').split('.')
@@ -72,6 +76,7 @@ const optionalText = (maxLength: number) =>
 const requiredName = requiredText(fieldLimits.name)
   .overwrite(normalizeName)
   .regex(namePattern, messages.name)
+  .refine(hasShortWords, messages.nameWord)
 
 const optionalName = z
   .string()
@@ -79,6 +84,7 @@ const optionalName = z
   .overwrite(normalizeName)
   .max(fieldLimits.name, messages.tooLong)
   .refine(value => !value || namePattern.test(value), messages.name)
+  .refine(hasShortWords, messages.nameWord)
   .default('')
 
 const mexicanPhone = requiredText(fieldLimits.phone)
