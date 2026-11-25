@@ -9,6 +9,7 @@ const phoneCharacters = /^\+?[\d\s.()-]+$/
 const mexicanNationalNumber = /^[1-9]\d{9}$/
 const namePattern = /^\p{L}[\p{L}\p{M}' ’.-]*$/u
 const amountPattern = /^\$?(\d{1,3}(,\d{3})+|\d+)(\.\d{1,2})?$/
+const minDownPaymentCents = 10_000 * 100
 const maxDownPaymentCents = 10_000_000 * 100
 const maxNameWordLength = 20
 
@@ -121,7 +122,7 @@ export function createQuoteSchema(content: QuoteSchemaContent) {
       .refine(
         cents =>
           Number.isSafeInteger(cents) &&
-          cents > 0 &&
+          cents >= minDownPaymentCents &&
           cents <= maxDownPaymentCents,
         messages.amountRange,
       ),

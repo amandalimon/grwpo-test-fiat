@@ -12,7 +12,7 @@ export const ui = {
     name: 'Usa solo letras, espacios, apóstrofos o guiones.',
     nameWord: 'Cada palabra puede tener hasta 20 letras.',
     amount: 'Escribe una cantidad válida, por ejemplo 80,000.00.',
-    amountRange: 'Escribe un valor entre $0.01 y $10,000,000.',
+    amountRange: 'Escribe un valor entre $10,000 y $10,000,000.',
     tooLong: 'El texto es demasiado largo.',
   },
 }
