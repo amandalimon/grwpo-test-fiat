@@ -34,7 +34,7 @@ export function Header({ content }: HeaderProps) {
           aria-label={ui.mainNavigation}
           className="hidden md:mt-3 md:mr-75 md:ml-99 md:block md:flex-1 lg:mr-0 lg:ml-139"
         >
-          <ul className="grid grid-flow-col font-nav text-11 font-bold tracking-nav text-text uppercase md:grid-cols-[8.125rem_13rem_8rem_auto] lg:grid-cols-[8.1875rem_12.5rem_8.1875rem_10.625rem_auto]">
+          <ul className="grid grid-flow-col font-nav text-11 font-bold tracking-nav text-text uppercase md:grid-cols-[130fr_208fr_128fr_auto] lg:grid-cols-[8.1875rem_12.5rem_8.1875rem_10.625rem_auto]">
             {content.navigation.map(link => (
               <li
                 key={link.href}
