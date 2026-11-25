@@ -14,7 +14,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="es-MX"
       className={`${lato.variable} ${playfairDisplay.variable}`}
     >
-      <body>{children}</body>
+      <body className="min-w-320">{children}</body>
     </html>
   )
 }
