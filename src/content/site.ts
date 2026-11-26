@@ -1,6 +1,13 @@
-import type { SiteContent } from './types'
+import { cacheLife } from 'next/cache'
+import { fetchDocument } from '@/lib/sanity'
+import type { NavigationLink, SiteContent } from './types'
 
-const siteContent: SiteContent = {
+type SiteDocument = {
+  brandName: string
+  navigation: NavigationLink[]
+}
+
+export const siteContent: SiteContent = {
   brandName: 'FIAT',
   navigation: [
     { label: 'Modelos', href: 'https://www.fiat.com.mx/' },
@@ -22,5 +29,18 @@ const siteContent: SiteContent = {
 }
 
 export async function getSiteContent(): Promise<SiteContent> {
-  return siteContent
+  'use cache'
+  cacheLife('minutes')
+
+  const document = await fetchDocument<SiteDocument>('site')
+  if (!document) return siteContent
+
+  return {
+    brandName: document.brandName,
+    navigation: document.navigation.map(({ label, href, desktopOnly }) => ({
+      label,
+      href,
+      desktopOnly,
+    })),
+  }
 }

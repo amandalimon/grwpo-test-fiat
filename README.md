@@ -1,6 +1,6 @@
 # FIAT Quote Form
 
-HTML rendition of the FIAT _Cotizador_ PSD at its three designed sizes (320, 768 and 1024), built with Next.js, React, Tailwind CSS and TypeScript. The form validates on the client and on the server and shows a confirmation after a successful submission.
+HTML rendition of the FIAT _Cotizador_ PSD at its three designed sizes (320, 768 and 1024), built with Next.js, React, Tailwind CSS and TypeScript. The form validates on the client and on the server and shows a confirmation after a successful submission. As an additional learning exercise, Sanity manages the copy and dummy data.
 
 ## Getting started
 
@@ -8,10 +8,11 @@ Requires Node.js 20.9 or later.
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000).
+Then open [http://localhost:3000](http://localhost:3000). The `.env.local` step connects the page to Sanity; without it, the page renders the same content from local files.
 
 Other scripts:
 
@@ -28,6 +29,7 @@ npm run lint
 | **Tailwind CSS 4**        | Responsive layouts and custom design tokens.      |
 | **TypeScript**            | Typed content, props and form values.             |
 | **Zod 4**                 | Shared client and server validation.              |
+| **Sanity**                | Headless CMS for the copy and dummy data.         |
 
 ## How the requirements are met
 
@@ -51,7 +53,8 @@ src/
 │       ├── actions.ts       Server validation
 │       ├── schema.ts        Shared Zod schema
 │       ├── confirmation.ts  Quote summary
-│       ├── content.ts       Copy and dummy data
+│       ├── content.ts       Getter and local content
+│       ├── sanity.ts        Sanity document mapping
 │       └── types.ts         Content types
 ├── components/
 │   ├── ui/                  Reusable controls
@@ -61,6 +64,7 @@ src/
 ├── lib/                     Shared helpers
 ├── styles/                  Font loading
 └── assets/images/           PSD images
+studio/                      Sanity Studio, schemas and seed script
 ```
 
 Dependencies point one way: `app → features → components, content, lib`. Shared code never imports from a feature, so a second feature could be added next to `quote/` without touching it.
@@ -92,7 +96,12 @@ Static composition uses Server Components. Client Components handle form state, 
 
 ### Content layer
 
-Copy and dummy data live in `src/content/` and `src/features/quote/content.ts`. Async getters retrieve the content, which the page passes to components through props. This keeps the presentation independent of the content source and provides an integration point for a CMS. Dynamic messages use `{placeholder}` templates.
+Copy and dummy data live in Sanity as two singleton documents, `site` and `quoteForm`, edited in the Studio. Async getters fetch them on the server and the page passes them to components through props, so components don't depend on the content source. Dynamic messages use `{placeholder}` templates.
+
+- **Caching.** Each getter uses `'use cache'` with `cacheLife('minutes')`. The page stays static and regenerates in the background on the first request after a minute, so published changes appear without a redeploy, though not instantly.
+- **Fallback.** Without `SANITY_PROJECT_ID`, or if a request fails, the getters return the local content in `src/content/` and `src/features/quote/content.ts`. The same content seeds the dataset.
+- **Client.** The app queries Sanity with `@sanity/client` directly. `next-sanity` adds live preview and visual editing, which this integration doesn't need, and requires the whole Studio as a peer dependency.
+- **Studio.** Schemas and the seed script live in `studio/`, a separate Sanity project. Editing requires an invitation.
 
 ### Accessibility
 
@@ -116,16 +125,11 @@ Tested in Chrome, Firefox and Safari at 320, 768, 1024 and 1920px, plus intermed
 
 ## Known limitations
 
-- **No backend.** Valid quotes are confirmed but not stored or sent anywhere.
+- **No persistence.** Quotes are validated on the server and confirmed, but not stored, emailed or sent to a dealership.
 - **Format checks only.** Validation can't confirm that an email address or phone number exists.
 - **PSD placeholders don't validate.** `01 . 844 . 439 . 06` and `80, 000.00` are kept as designed, but they aren't valid input.
 - **Dummy options.** Models, versions, dealers and terms are sample data and don't depend on each other.
 - **Navigation font.** Without Gill Sans installed (Windows, Android), the navigation renders in Lato.
-
-## Next steps
-
-- Move content to a headless CMS such as Sanity, keeping the local content as a fallback.
-- Unit tests for the schema and an end-to-end test of the submission flow.
 
 ## Screenshots
 
