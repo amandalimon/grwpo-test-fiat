@@ -13,7 +13,10 @@
     "noUncheckedSideEffectImports": false,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@/*": ["../src/*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

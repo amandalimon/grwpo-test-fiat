@@ -12,7 +12,7 @@ const toOptions = (labels: string[]): Option[] =>
     label,
   }))
 
-const quoteFormContent: QuoteFormContent = {
+export const quoteFormContent: QuoteFormContent = {
   hero: {
     overline: 'Cotizador',
     eyebrow: 'Citadino, aventurero, deportivo',

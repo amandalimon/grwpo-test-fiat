@@ -1,6 +1,6 @@
 import type { SiteContent } from './types'
 
-const siteContent: SiteContent = {
+export const siteContent: SiteContent = {
   brandName: 'FIAT',
   navigation: [
     { label: 'Modelos', href: 'https://www.fiat.com.mx/' },
