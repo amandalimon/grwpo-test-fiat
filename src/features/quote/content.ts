@@ -1,16 +1,8 @@
-import type { Option } from '@/content/types'
+import { cacheLife } from 'next/cache'
+import { fetchDocument } from '@/lib/sanity'
+import { toOptions } from '@/lib/to-options'
+import { toQuoteFormContent, type QuoteFormDocument } from './sanity'
 import type { QuoteFormContent } from './types'
-
-const toOptions = (labels: string[]): Option[] =>
-  labels.map(label => ({
-    value: label
-      .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, ''),
-    label,
-  }))
 
 export const quoteFormContent: QuoteFormContent = {
   hero: {
@@ -161,5 +153,9 @@ export const quoteFormContent: QuoteFormContent = {
 }
 
 export async function getQuoteFormContent(): Promise<QuoteFormContent> {
-  return quoteFormContent
+  'use cache'
+  cacheLife('minutes')
+
+  const document = await fetchDocument<QuoteFormDocument>('quoteForm')
+  return document ? toQuoteFormContent(document) : quoteFormContent
 }

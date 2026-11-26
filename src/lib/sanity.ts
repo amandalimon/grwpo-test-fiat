@@ -11,3 +11,14 @@ export const sanityClient = projectId
       useCdn: true,
     })
   : null
+
+export async function fetchDocument<Document>(id: string) {
+  if (!sanityClient) return null
+
+  try {
+    return await sanityClient.fetch<Document | null>('*[_id == $id][0]', { id })
+  } catch (error) {
+    console.error(`Could not fetch "${id}" from Sanity`, error)
+    return null
+  }
+}
